@@ -1,0 +1,70 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	   xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.1.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://code.alibabatech.com/schema/dubbo
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+	<dubbo:application name="basic_dubbo_consumer" />
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+	<dubbo:registry address="zookeeper://127.0.0.1:2181" check="false"/>
+
+<!--	 启用spring mvc 注解
+	<context:annotation-config/>
+	&lt;!&ndash; MVC转换 &ndash;&gt;
+	<mvc:annotation-driven/>
+	<mvc:default-servlet-handler/>-->
+
+	<dubbo:annotation package="com" />
+	<context:component-scan base-package="com"/>
+	<!-- 服务消费端配置 未设置成功-->
+<!--	<dubbo:provider timeout="10" retries="0"/>
+	<dubbo:consumer timeout="10" retries="0"/>-->
+
+	<!-- 可以扫描controller、service、... 这里让扫描controller，指定controller的包 -->
+	<!--<context:component-scan base-package="com.controller"></context:component-scan>
+	<context:component-scan base-package="com.service"></context:component-scan>-->
+	<!-- 使用 mvc:annotation-driven代替上边注解映射器和注解适配器配置
+	mvc:annotation-driven默认加载很多的参数绑定方法，
+	比如json转换解析器就默认加载了，如果使用mvc:annotation-driven不用配置上边的RequestMappingHandlerMapping和RequestMappingHandlerAdapter
+	实际开发时使用mvc:annotation-driven
+	 -->
+	<!--<mvc:annotation-driven></mvc:annotation-driven>-->
+	
+
+	<!-- 视图解析器
+	解析jsp解析，默认使用jstl标签，classpath下的得有jstl的包
+	 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"></bean>
+	
+	<!-- 配置文件上传 -->
+	<!--<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>10485760</value>
+		</property>
+	</bean>-->
+	
+	<!-- 配置统一异常处理 -->
+	<!-- <bean id="id" class="org.java.exception.CustomerExceptionResolver"></bean> -->
+	<!-- 配置拦截器器 -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			拦截器执行的路径名称  /**表示所有的url都要经过拦截器
+			<mvc:mapping path="/**"></mvc:mapping>
+			<bean class="org.java.interceptor.LoginIntercepter"/>		
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+</beans>

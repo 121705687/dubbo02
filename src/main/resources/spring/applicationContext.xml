@@ -1,0 +1,54 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.1.xsd 
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd 
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd ">
+
+	<!-- 加载配置文件 -->
+	<context:property-placeholder  location="classpath:spring/db.properties"/>
+	<!-- 数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="10" />
+		<property name="maxIdle" value="5" />
+	</bean>
+	
+	<!-- mapper配置 -->
+	<!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">		
+		<!-- 数据库连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		
+		<!-- 加载mybatis的全局配置文件 -->
+		<property name="configLocation" value="classpath:spring/SqlMapConfig.xml"/>
+				
+		<!-- 加入自动扫描mapper.xml配置文件,好像要，好像又可不要。classpath后面的*表示可用通配符-->		
+        <!-- <property name="mapperLocations" value="classpath*:com/mapper/*.xml,com/linc/fssc/repository/*.xml"/> -->
+	</bean>
+	<!-- MapperScannerConfigurer根据mapper自动生成id，这个id是类名的首字母小写 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--basePackage指定要扫描的包，在此包之下的映射器都会被搜索到。可指定多个包，包与包之间用逗号或分号分隔 -->
+		<property name="basePackage" value="com.mapper" />
+		<!-- value="sqlSessionFactory":注入的是 sqlSessionFactory name="sqlSessionFactoryBeanName"是将sqlSessionFactory注入到org.java.mapper包里的所有mapper里面，所以是根据sqlSessionFactoryBeanName -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+	<!-- 加入定时任务 ok 的 -->
+	<!-- <import resource="classpath:spring/applicationContext-quartz.xml"/>	 -->
+
+	<!-- 导入redis的配置文件 -->
+	<import resource="classpath:spring/redis.xml"/>
+	<!-- 导入activeMQ的配置文件 -->
+	<import resource="classpath:spring/activeMQ.xml"/>
+</beans>

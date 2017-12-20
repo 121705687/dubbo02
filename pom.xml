@@ -1,0 +1,428 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>dubbo02</groupId>
+  <artifactId>dubbo02</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>dubbo02 Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <!-- spring框架 -->
+    <spring-framework.version>4.1.1.RELEASE</spring-framework.version>
+    <spring-quartz.version>2.2.1</spring-quartz.version><!-- 定时任务 -->
+
+    <!-- 数据层框架相关配置 -->
+    <mybatis-spring.version>1.2.2</mybatis-spring.version>
+    <mybatis.version>3.2.6</mybatis.version>
+
+    <!-- 数据源,连接池的相关配置 -->
+    <druid.version>1.0.9</druid.version>
+    <fastjson.version>1.1.42</fastjson.version>
+    <ojdbc6.version>11.2.0.1.0</ojdbc6.version><!--orcal数据库-->
+    <mysql.version>5.1.39</mysql.version><!--mysql数据库-->
+
+    <!-- 测试依赖jar的配置 -->
+    <junit.version>4.12</junit.version>
+    <!-- J2EE配置 -->
+    <jstl.version>1.2</jstl.version>
+    <javax.inject.version>1</javax.inject.version>
+    <jsr250.version>1.0</jsr250.version>
+    <servlet.version>3.1.0</servlet.version>
+    <javax.annotation.version>1.2</javax.annotation.version>
+    <servlet.version>2.5</servlet.version>	<!-- tomact	本来有 -->
+    <commons-dbcp.version>1.4</commons-dbcp.version>
+    <commons-pool.version>1.6</commons-pool.version>
+    <log4j.version>1.2.17</log4j.version> <!-- log4j -->
+    <!-- webservice相关jar包 -->
+    <cxf.version>3.0.6</cxf.version>
+  </properties>
+
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${spring-framework.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>${spring-framework.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring-framework.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-web</artifactId>
+      <version>${spring-framework.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${spring-framework.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>${spring-framework.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context-support</artifactId>
+      <version>${spring-framework.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jdbc</artifactId>
+      <version>${spring-framework.version}</version>
+    </dependency>
+    <!-- spring end-->
+
+    <!-- mybatis start-->
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis</artifactId>
+      <version>${mybatis.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.mybatis</groupId>
+      <artifactId>mybatis-spring</artifactId>
+      <version>${mybatis-spring.version}</version>
+    </dependency>
+    <!-- mybatis end-->
+
+    <!-- mysql connector start-->
+    <!-- <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>5.1.34</version>
+    </dependency> -->
+    <!-- mysql connector end-->
+
+    <!-- junit start-->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+    </dependency>
+    <!-- junit end-->
+
+    <!-- 阿里巴巴数据源包 -->
+    <!-- #################################依赖阿里巴巴框架的结束####################################### -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastjson.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>${druid.version}</version>
+    </dependency>
+    <!-- #################################依赖阿里巴巴框架的结束####################################### -->
+    <dependency>
+      <groupId>com.oracle</groupId>
+      <artifactId>ojdbc6</artifactId>
+      <version>${ojdbc6.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
+
+    <!-- #################################依赖数据源的结束######################################################## -->
+    <!-- 其他依赖开始 -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>${jstl.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>${javax.inject.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <version>${javax.annotation.version}</version>
+    </dependency>
+    <!-- 文件少包 -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>${servlet.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!--  -->
+    <dependency>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>${commons-dbcp.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-pool</groupId>
+      <artifactId>commons-pool</artifactId>
+      <version>${commons-pool.version}</version>
+    </dependency>
+    <!--加入日志log4j-->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>${log4j.version}</version>
+    </dependency>
+    <!--  <dependency>
+       <groupId>junit</groupId>
+       <artifactId>junit</artifactId>
+       <version>3.8.1</version>
+       <scope>javaTest</scope>
+     </dependency> -->
+    <!-- Lucene 需要的jar包 -->
+    <!-- <dependency>
+         <groupId>org.apache.lucene</groupId>
+         <artifactId>lucene-core</artifactId>
+         <version>4.0.0</version>
+     </dependency>
+
+     <dependency>
+         <groupId>org.apache.lucene</groupId>
+         <artifactId>lucene-highlighter</artifactId>
+         <version>4.0.0</version>
+     </dependency> -->
+    <!-- 2.0.0，3.3.0无 -->
+    <!-- <dependency>
+        <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-analyzers-common</artifactId>
+        <version>4.0.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-memory</artifactId>
+        <version>4.0.0</version>
+    </dependency>  -->
+    <!-- 2.0.0无 -->
+    <!-- <dependency>
+        <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-queryparser</artifactId>
+        <version>4.0.0</version>
+    </dependency> -->
+    <!-- 5.5.0删除索引时要用 -->
+    <!-- <dependency>
+        <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-backward-codecs</artifactId>
+        <version>5.5.0</version>
+    </dependency> -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.9</version>
+    </dependency>
+    <!-- 庖丁解牛分词包2个jar包 -->
+    <!-- <dependency>
+        <groupId>paoding</groupId>
+        <artifactId>paoding-analysis</artifactId>
+        <version>2.0.4</version>
+    </dependency> -->
+
+    <!-- 单独加入jxl的jar包 -->
+    <!-- <dependency>
+        <groupId>net.sourceforge.jexcelapi</groupId>
+        <artifactId>jxl</artifactId>
+        <version>2.6.12</version>
+    </dependency> -->
+    <!-- 用正则搜索的2个jar包 -->
+    <!-- <dependency>
+        <groupId>org.apache.lucene</groupId>
+        <artifactId>lucene-regex</artifactId>
+        <version>2.2.0</version>
+    </dependency>
+    <dependency>
+        <groupId>jakarta-regexp</groupId>
+        <artifactId>jakarta-regexp</artifactId>
+        <version>1.4</version>
+    </dependency> -->
+    <!-- io操作的工具包 -->
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.4</version>
+    </dependency>
+    <!-- mongodb驱动包 -->
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+      <version>3.4.0</version>
+    </dependency>
+    <!-- 看能否代替驱动 -->
+    <!-- <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-mongodb</artifactId>
+        <version>1.8.4.RELEASE</version>
+    </dependency> -->
+    <!-- 定时任务 begin-->
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
+      <version>${spring-quartz.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz-jobs</artifactId>
+      <version>${spring-quartz.version}</version>
+    </dependency>
+    <!-- 定时任务 end-->
+    <!-- solrj 操作solr的jar -->
+    <dependency>
+      <groupId>org.apache.solr</groupId>
+      <artifactId>solr-solrj</artifactId>
+      <version>5.5.0</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-httpclient</groupId>
+      <artifactId>commons-httpclient</artifactId>
+      <version>3.1</version>
+    </dependency>
+    <dependency>	<!-- 庖丁解牛和solr都需要 -->
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.2</version>
+    </dependency>
+    <!--工具类  -->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.4</version>
+    </dependency>
+    <!-- 单独解析xml用 -->
+    <dependency>
+      <groupId>org.dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+    <!-- 操作实体与xml用的 -->
+    <dependency>
+      <groupId>com.thoughtworks.xstream</groupId>
+      <artifactId>xstream</artifactId>
+      <version>1.4.7</version>
+    </dependency>
+    <!-- 可以直接用Client,有个包与下面的cxf的包版本不一致。 -->
+    <!-- <dependency>
+        <groupId>org.codehaus.xfire</groupId>
+        <artifactId>xfire-java5</artifactId>
+        <version>1.2.6</version>
+    </dependency> -->
+
+    <!-- webService的jar包 ，可以测试发布成功-->
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxws</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http</artifactId>
+      <version>${cxf.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http-jetty</artifactId>
+      <version>${cxf.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>geronimo-servlet_3.0_spec</artifactId>
+          <groupId>org.apache.geronimo.specs</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <!-- jxl操作excel -->
+    <dependency>
+      <groupId>net.sourceforge.jexcelapi</groupId>
+      <artifactId>jxl</artifactId>
+      <version>2.6.12</version>
+    </dependency>
+    <!-- poi操作excel 2003以前版本hssf-->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>3.16</version>
+    </dependency>
+    <!-- poi操作2003以后的版本xssf -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>3.16</version>
+    </dependency>
+    <!--zookeeper-->
+    <dependency>
+      <groupId>org.apache.zookeeper</groupId>
+      <artifactId>zookeeper</artifactId>
+      <version>3.4.9</version>
+    </dependency>
+    <!-- dubbo -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>dubbo</artifactId>
+      <version>2.5.3</version>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.101tec</groupId>
+      <artifactId>zkclient</artifactId>
+      <version>0.10</version>
+    </dependency>
+    <!--加入依赖的dubbo接口-->
+    <dependency>
+      <groupId>com.student.demo</groupId>
+      <artifactId>student-api</artifactId>
+      <version>1.0-SNAPSHOT</version>
+        <exclusions>
+            <exclusion>
+                <groupId>*</groupId>
+                <artifactId>*</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+      <!--redis和spring整合-->
+      <dependency>
+          <groupId>org.springframework.data</groupId>
+          <artifactId>spring-data-redis</artifactId>
+          <version>1.6.1.RELEASE</version>
+      </dependency>
+      <!--操作redis的jar包-->
+      <dependency>
+          <groupId>redis.clients</groupId>
+          <artifactId>jedis</artifactId>
+          <version>2.7.3</version>
+      </dependency>
+      <!--activeMq 消息jar包-->
+      <dependency>
+          <groupId>org.apache.activemq</groupId>
+          <artifactId>activemq-all</artifactId>
+          <version>5.14.2</version>
+      </dependency>
+  </dependencies>
+  <build>
+    <finalName>dubbo02</finalName>
+  </build>
+</project>

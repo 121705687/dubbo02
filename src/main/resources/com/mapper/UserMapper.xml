@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!-- <mapper namespace="model.UserMapper" > -->
+<mapper namespace="com.mapper.UserMapper">
+	<resultMap id="BaseResultMap" type="com.model.UserBigInfo" >
+	    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+	    <result column="WORK_CODE" property="workCode" jdbcType="VARCHAR" />
+	    <result column="USER_LOGIN_NAME" property="userLoginName" jdbcType="VARCHAR" />
+	    <result column="USER_PWD" property="userPwd" jdbcType="VARCHAR" />
+	    <result column="USER_STATUS" property="userStatus" jdbcType="DECIMAL" />
+	    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+	    <result column="BANK_ID" property="bankId" jdbcType="VARCHAR" />
+	    <result column="DEPT_ID" property="deptId" jdbcType="VARCHAR" />
+	    <result column="USER_RANK" property="userRank" jdbcType="VARCHAR" />
+	    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+	    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+	    <result column="PICTURE_ID" property="pictureId" jdbcType="VARCHAR" />
+	    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+	    <result column="DEL_TIME" property="delTime" jdbcType="TIMESTAMP" />
+	    <result column="USER_REMARK" property="userRemark" jdbcType="VARCHAR" />
+	    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+	    <result column="PARENT_GROUP" property="parentGroup" jdbcType="VARCHAR" />
+	    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+	    <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR" />
+	    <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+	    <result column="PERSON_ID" jdbcType="DECIMAL" property="personId" />
+	    <result column="PERSON_NAME" jdbcType="VARCHAR" property="personName" />
+  </resultMap>
+
+	<select id="select01" resultMap="BaseResultMap">
+		/*select * from fnd_user where user_id in (2616,2617)*/
+		select * from fnd_user
+	</select>
+</mapper>
